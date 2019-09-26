@@ -1,0 +1,14 @@
+{
+  "name": "Formy Filly",
+  "permissions": [
+    "<all_urls>"
+  ],
+  "content_scripts": [{
+    "js": ["contentscript.bundle.js"],
+    "matches": ["<all_urls>"]
+  }],
+  "icons": {
+    "128": "icon-128.png"
+  },
+  "manifest_version": 2
+}

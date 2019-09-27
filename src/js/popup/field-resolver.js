@@ -18,16 +18,16 @@ function maybeFillInput(input) {
   fillInput(input);
 }
 
-function fillInput(input){
-  input.value = resolvers().find(resolverFunc => resolverFunc(input) !== undefined)(input);
-}
-
 function getFakeByName(input) {
   switch (input.name) {
     case 'username':
       return faker.internet.userName();
+    case 'name':
+      return faker.name.findName();
     case 'email':
       return faker.internet.email();
+    case 'phone':
+      return faker.phone.phoneNumberFormat();
     default:
       return faker.random.word();
   }

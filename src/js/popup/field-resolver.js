@@ -4,6 +4,10 @@ export function fillField(field){
   if(field.tagName === 'INPUT'){
     maybeFillInput(field);
   }
+
+  if(field.tagName === 'TEXTAREA'){
+    maybeFillInput(field);
+  }
 }
 
 function maybeFillInput(input) {

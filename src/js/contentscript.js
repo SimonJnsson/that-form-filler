@@ -21,7 +21,7 @@ function getFocusedForm() {
 
 function fillFocusedForm() {
   let form = getFocusedForm();
-  let fields = form.querySelectorAll('input,select');
+  let fields = form.querySelectorAll('input,select,textarea');
 
   fields.forEach((field) => fillField(field));
 }

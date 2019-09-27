@@ -46,6 +46,13 @@ function getFakeByType(input) {
   }
 }
 
+function fillInput(input){
+  input.value = resolvers().reduce(
+      (acc, curr) => acc === undefined ? curr(input) : acc,
+      undefined
+  );
+}
+
 function resolvers(){
   return [
     getFakeByType,

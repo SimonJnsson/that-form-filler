@@ -22,6 +22,8 @@ function getFakeByName(input) {
   switch (input.name) {
     case 'username':
       return faker.internet.userName();
+    case 'email':
+      return faker.internet.email();
     default:
       return faker.random.word();
   }

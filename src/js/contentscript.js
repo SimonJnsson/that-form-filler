@@ -1,5 +1,9 @@
-import faker from "faker";
-import {fillField} from "./popup/field-resolver";
+const fillField = require("./popup/field-resolver").fillField;
+
+function setup() {
+  setupShortcut();
+  setupMessageListeners();
+}
 
 function setupShortcut() {
   document.onkeyup = (e) => {
@@ -12,7 +16,7 @@ function setupShortcut() {
 function getFocusedForm() {
   let focusedInput = document.activeElement;
 
-  if (!focusedInput) {
+  if (!focusedInput || focusedInput) {
     return document;
   }
 
@@ -21,11 +25,29 @@ function getFocusedForm() {
 
 function fillFocusedForm() {
   let form = getFocusedForm();
-  let fields = form.querySelectorAll('input,select,textarea');
+
+  let fields = getFillableFields(form);
 
   fields.forEach((field) => fillField(field));
 }
 
-setupShortcut();
+function getFillableFields(parent){
+  return parent.querySelectorAll('input:not([type="submit"]),select,textarea');
+}
 
+function setupMessageListeners() {
+  chrome.extension.onMessage.addListener(function (message, sender, callback) {
+    if (message.functionToInvoke == "fillFocusedForm") {
+      fillFocusedForm();
+    }
+  });
+}
+
+setup();
+
+
+module.exports = {
+  getFillableFields,
+  fillFocusedForm
+}
 
